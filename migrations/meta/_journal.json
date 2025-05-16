@@ -8,6 +8,13 @@
       "when": 1746960913599,
       "tag": "0000_wealthy_joystick",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1747420432596,
+      "tag": "0001_omniscient_yellow_claw",
+      "breakpoints": true
     }
   ]
 }
