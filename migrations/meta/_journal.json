@@ -15,6 +15,13 @@
       "when": 1747420432596,
       "tag": "0001_omniscient_yellow_claw",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747424900069,
+      "tag": "0002_tired_scarlet_witch",
+      "breakpoints": true
     }
   ]
 }
