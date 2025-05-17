@@ -81,7 +81,7 @@ export const signUp = async (params: AuthCredentials) => {
       },
     });
 
-    return redirect("/completed-registration");
+    redirect("/completed-registration");
   } catch (error) {
     console.log(error, "Signup error");
     return { success: false, error: "Signup error" };
