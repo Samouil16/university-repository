@@ -3,7 +3,6 @@
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
-import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "@/lib/ratelimit";
@@ -38,7 +37,15 @@ export const signInWithCredentials = async (
 };
 
 export const signUp = async (params: AuthCredentials) => {
-  const { fullName, email, universityId, password, universityCard } = params;
+  const {
+    firstName,
+    lastName,
+    academicYear,
+    university,
+    department,
+    email,
+    phone,
+  } = params;
 
   const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
   const { success } = await ratelimit.limit(ip);
@@ -55,27 +62,26 @@ export const signUp = async (params: AuthCredentials) => {
     return { success: false, error: "User already exists" };
   }
 
-  const hashedPassword = await hash(password, 10);
-
   try {
     await db.insert(users).values({
-      fullName,
+      firstName,
+      lastName,
+      academicYear,
+      university,
+      department,
       email,
-      universityId,
-      password: hashedPassword,
-      universityCard,
+      phone,
     });
 
     await workflowClient.trigger({
       url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
       body: {
         email,
-        fullName,
+        fullName: `${firstName} ${lastName}`,
       },
     });
 
-    await signInWithCredentials({ email, password });
-    return { success: true };
+    return redirect("/completed-registration");
   } catch (error) {
     console.log(error, "Signup error");
     return { success: false, error: "Signup error" };

@@ -1,11 +1,13 @@
 import { z } from "zod";
 
 export const signUpSchema = z.object({
-  fullName: z.string().min(3),
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
   email: z.string().email(),
-  universityId: z.coerce.number(),
-  universityCard: z.string().nonempty("University Card is required"),
-  password: z.string().min(8),
+  phone: z.string().regex(/^(?:\+357|00357)?(?:9[5-9]|2\d)\d{6}$/i),
+  university: z.string().min(3),
+  department: z.string().min(3),
+  academicYear: z.coerce.number().int().min(1).max(7),
 });
 
 export const signInSchema = z.object({

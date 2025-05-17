@@ -41,17 +41,24 @@ export const adminSideBarLinks = [
 ];
 
 export const FIELD_NAMES = {
-  fullName: "Full Name",
+  firstName: "Όνομα",
+  lastName: "Επίθετο",
+  academicYear: "Έτος",
+  university: "Πανεπιστήμιο",
+  department: "Σχολή",
   email: "Email",
-  universityId: "University ID Number",
-  password: "Password",
-  universityCard: "Upload University ID Card",
+  phone: "Τηλέφωνο",
+  password: "Κωδικός",
 };
 
 export const FIELD_TYPES = {
-  fullName: "text",
+  firstName: "text",
+  lastName: "text",
+  academicYear: "number",
+  university: "text",
+  department: "text",
   email: "email",
-  universityId: "number",
+  phone: "number",
   password: "password",
 };
 
